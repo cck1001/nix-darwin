@@ -764,6 +764,12 @@ in
       description = "Extra lines to be added verbatim to the bottom of the generated Brewfile.";
     };
 
+    env = mkOption {
+      type = types.str;
+      default = "";
+      description = "inject env";
+    };
+
     brewfile = mkInternalOption {
       type = types.str;
       description = "String reprensentation of the generated Brewfile useful for debugging.";
@@ -815,6 +821,7 @@ in
           --user=${escapeShellArg cfg.user} \
           --set-home \
           env \
+          ${cfg.env} \
           ${cfg.onActivation.brewBundleCmd}
       else
         echo -e "\e[1;31merror: Homebrew is not installed, skipping...\e[0m" >&2
